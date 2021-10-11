@@ -1,0 +1,32 @@
+doctype html
+html(lang="ko")
+    head
+        title #{lotName}::웹 할인
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/static/css/styles.css")
+        script(src="https://kit.fontawesome.com/e07b3cc652.js" crossorigin="anonymous") 
+        //- script(defer, src="./js/common.js") 
+    body
+        header 
+            nav.nav 
+                a(href="/")  CMCNI
+                .nav-dropdown 
+                    i.fas.fa-bars.nav-dropdown-btn
+                    .nav-dropdown-content 
+                        a(href="/")
+                            i.fas.fa-user-cog 
+                            span 매장설정
+                        a(href="/") 
+                            i.fas.fa-chart-bar 
+                            span 할인내역  
+                        a(href="/") 
+                            i.fas.fa-lock 
+                            span 암호변경
+                        a(href="/") 
+                            i.fas.fa-sign-out-alt 
+                            span 로그아웃
+        main
+            block content
+
+    include partials/footer
