@@ -1,29 +1,9 @@
 extends base
-include mixins/discount
 
 block content 
-    form(action="/", method="POST", id="dcSearchFrm").search-container
-        p 차량조회
-        input(type="number", name="carNumber", id="carNumber", value=`${carNumber}`, placeholder="차량번호 뒤 4자리 (ex_2258)",)
-        button(type="button", id="searchBtn", role="img", aria-label="loading") 검색
-        //- if discounts
-        //-     p.data 차량을 확인하시고 할인할 차량을 선택해 주세요.
-        //- each x  in discounts    
-        //-     +discount(x)
-        //- else 
-        //-     p.nodata 조회된 차량이 없습니다.
-
-
-    //- .num-pad 
-    //-     div 1
-    //-     div 2
-    //-     div 3
-    //-     div 4
-    //-     div 5
-    //-     div 6
-    //-     div 7
-    //-     div 8
-    //-     div 9
-    //-     div c
-    //-     div 0
-    //-     div o
+    form(action="/user", method="POST" style="margin-top: 200px")
+        input(type="number", name="shopName", placeholder="관리실")
+        input(type="number", name="shopTel", placeholder="02-888-2256")
+        input(type="number", name="id", placeholder="admin")
+        input(type="number", name="pw", placeholder="⚫⚫⚫⚫⚫⚫⚫")
+        button(type="submit") SEND POST

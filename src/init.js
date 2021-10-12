@@ -1,3 +1,6 @@
 import app from "./server";
+import dotenv from "dotenv";
 
-app.listen(4001, console.log(`Server listen ${4001} ( •̀ ω •́ )`));
+dotenv.config();
+
+app.listen(process.env.PORT, console.log(`Server listen ${process.env.PORT} ( •̀ ω •́ )`));

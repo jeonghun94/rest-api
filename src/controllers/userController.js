@@ -1,7 +1,6 @@
-// import config from "../mssqlConfig";
 import sql from "mssql";
-import pool from "../pool";
-
+//import pool from "../pool";
+import { QUERY } from "../query";
 
 const config = {
     server: "localhost",
@@ -13,22 +12,40 @@ const config = {
     }
 };
 
-const pool1 = new sql.ConnectionPool(config);
-const pool1Connect = pool1.connect();
+const pool = new sql.ConnectionPool(config);
 
-pool1.on('error', err => {
+pool.connect();
+pool.on('error', err => {
     // ... error handler
-})
+    console.log(err, "에러입니당!!!!!!!");
 
-export const test = async (req, res) => {
-        await pool1Connect; // ensures that the pool has been created
+});
+
+export const home = (req, res) => {
+
+    return res.render("home");
+}
+
+export const userCreate = async (req, res) => {
+    console.log(req.body);
+    res.json(await excuteQuery(QUERY.userCreate(req.body)));
+};
+
+export const userList = async (req, res) => {
+    res.json(await excuteQuery(QUERY.userList));
+}
+
+export const userDetail = async (req, res) => {
+    const { shopCode } = req.params;
+    res.json(await excuteQuery(QUERY.userDetail(shopCode)));
+}
+
+const excuteQuery = async query => {
     try {
-        const request = pool1.request(); // or: new sql.Request(pool1)
-        const {recordset} = await request.query('select top(1) * from ps130')
-        console.dir(recordset)
-        res.json(recordset);
+        const request = pool.request();
+        const { recordset } = await request.query(query);
+        return recordset;
     } catch (err) {
         console.error('SQL error', err);
     }
-
-}
+};
